@@ -23,35 +23,21 @@
         let newWord;// 새로 입력한 단어
 
         const onClickButton = () => {
-            if (!word) { // 제시어가 비어 있는가?
+            if (!word || word[word.length - 1] === newWord[0]) { // 제시어가 비어 있는가?
                 // 비어있다
                 word = newWord; // 입력한 단어가 제시어가 된다
                 $word.textContent = word; // id가 word인 태그에 제시어를 넣어줌
-                $input.value = ''; // 빈 값으로 바꿔줘야 다시 입력하기 편할테니 값을 날리죠
-                $input.focus();
                 const order = Number($order.textContent);   // 현재 플레이어 순서
                 if (order + 1 > number) {
                     $order.textContent = 1;
                 } else {
                     $order.textContent = order + 1;
                 }
-            } else {
-                // 비어있지 않다
-                if (word[word.length - 1] === newWord[0]) {// 제시어의 맨 마지막 글자가 새 단어의 첫 글자와 같은가
-                    word = newWord;
-                    $word.textContent = word;
-                    $input.value = '';
-                    $input.focus();
-                    const order = Number($order.textContent);   // 현재 플레이어 순서
-                    if (order + 1 > number) {
-                        $order.textContent = 1;
-                    } else {
-                        $order.textContent = order + 1;
-                    }
-                } else {    // 제시어의 마지막 글자와 새 단어의 첫 글자가 다르다
-                    alert('올바르지 않은 단어!')
-                }
+            } else {    // 제시어의 마지막 글자와 새 단어의 첫 글자가 다르다
+                alert('올바르지 않은 단어!')
             }
+            $input.value = ''; // 빈 값으로 바꿔줘야 다시 입력하기 편할테니 값을 날리죠
+            $input.focus();
         }
 
         const onInput = (event) => {
